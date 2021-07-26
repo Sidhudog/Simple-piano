@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Piano</title>
+    <style>
+        .white {
+            height: 400px;
+            width: 100px;
+            background-color: rgb(255, 255, 255);
+            border: solid rgb(234, 234, 234);
+            border-radius: 10px;
+        }
+        .white.active{
+            background-color: rgb(0, 0, 0);
+        }
+        .black.active{
+            background-color: rgb(255, 255, 255)
+        }
+        .black {
+            background-color: rgb(0, 0, 0);
+            border: rgb(255, 255, 255);
+            height: 200px;
+            width: 50px;
+            border-radius: 5px;
+            z-index: 2;
+            margin-left: -25px;
+            margin-right: -25px;
+        }
+
+        body {
+            background-color: rgb(255, 170, 170);
+            min-height: 100vh;
+        }
+
+        #piano {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="piano">
+        <div id="A" class="key white" >A</div>
+        <div id="W" class="key black">W</div>
+        <div id="S" class="white key">S</div>
+        <div id="E" class="black key">E</div>
+        <div id="D" class="white key">D</div>
+        <div id="F" class="white key">F</div>
+        <div id="T" class="black key">T</div>
+        <div id="G" class="white key">G</div>
+        <div id="Y" class="black key">Y</div>
+        <div id="H" class="white key">H</div>
+        <div id="U" class="black key">U</div>
+        <div id="K" class="white key">K</div>
+
+    </div>
+
+
+</body>
+<script>
+
+    const keys = document.querySelectorAll('.key')
+    keys.forEach(key => {
+        key.addEventListener('click',function(Element){
+            if (Element.repeat) return
+            var ele = Element.path[0].innerHTML + '.mp3'
+            var sound = new Audio(ele)
+            sound.currentTime =0
+            key.classList.add('active')
+            sound.play()
+            setTimeout(function(){fun1(key)},50)
+            
+        });
+    })
+
+    function fun1(key){
+        key.classList.remove('active')
+    }
+
+
+
+
+       
+           document.addEventListener('keydown', function (e) {
+                console.log(e)
+                  if (e.repeat) return
+                var keynote = String.fromCharCode(e.keyCode)
+               var sound = new Audio(keynote + '.mp3')
+               sound.currentTime = 0
+               key=document.getElementById(keynote)
+               console.log(keynote)
+               key.classList.add('active')
+               sound.play()
+               setTimeout(function () { fun1(key) }, 50)
+            })
+</script>
+
+</html>
